@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import AppNavigation from './src/navigation/AppNavigation';
+import AppLoading from 'expo-app-loading';
+import { Provider } from 'react-redux';
+import {Context} from './src/context';
+import SocketController from './src/service/SocketController';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+const controller = new SocketController();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const fonts = () => Font.loadAsync({
+	'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+	'roboto-black': require('./assets/fonts/Roboto-Black.ttf'),
+	'roboto-medium': require('./assets/fonts/Roboto-Medium.ttf'),
+	'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+	'roboto-thin': require('./assets/fonts/Roboto-Thin.ttf'),
+	'roboto-light': require('./assets/fonts/Roboto-Light.ttf')
 });
+
+ const App = () => {
+	const [font, setFont] = useState(false);
+
+	if(font) {
+		return (
+			<Provider store={store}>
+				<Context.Provider value={controller}>
+					<AppNavigation accessed={true}/>
+				</Context.Provider>
+			</Provider>
+		);
+	} else {
+		return (
+			<AppLoading 
+				startAsync={fonts} 
+				onError={(error)=>console.log(error)} 
+				onFinish={() => setFont(true)}/>
+		);
+	}
+
+};
+export default App;
+
