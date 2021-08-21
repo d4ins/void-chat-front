@@ -1,7 +1,9 @@
+import {_apiBase} from '../constants';
 import {io} from 'socket.io-client';
 
 export default class SocketController {
-    _apiBase = 'http://192.168.1.6:3001'
+    _apiBase = _apiBase
+    
     connect = () => {
         this.socket = io(this._apiBase);
     }
@@ -20,17 +22,5 @@ export default class SocketController {
 
     emit = (header, data) => {
         this.socket.emit(header, data);
-    }
-
-
-    login = async (data) => {
-        const res = await fetch(`${this._apiBase}/login`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        return res;
     }
 }

@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import AppNavigation from './src/navigation/AppNavigation';
 import AppLoading from 'expo-app-loading';
+import {loadAsync} from 'expo-font';
 import { Provider } from 'react-redux';
 import {Context} from './src/context';
+import {MenuProvider} from 'react-native-popup-menu';
 import SocketController from './src/service/SocketController';
+import store from './src/store';
 
 const controller = new SocketController();
 
-const fonts = () => Font.loadAsync({
+const fonts = () => loadAsync({
 	'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
 	'roboto-black': require('./assets/fonts/Roboto-Black.ttf'),
 	'roboto-medium': require('./assets/fonts/Roboto-Medium.ttf'),
@@ -18,12 +21,15 @@ const fonts = () => Font.loadAsync({
 
  const App = () => {
 	const [font, setFont] = useState(false);
+						//<MenuProvider>
+
+						//</MenuProvider>
 
 	if(font) {
 		return (
 			<Provider store={store}>
 				<Context.Provider value={controller}>
-					<AppNavigation accessed={true}/>
+						<AppNavigation/>
 				</Context.Provider>
 			</Provider>
 		);

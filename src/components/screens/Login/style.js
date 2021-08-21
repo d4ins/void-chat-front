@@ -2,22 +2,31 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
     screen: {
-        paddingTop: 25,
         paddingHorizontal: 20,
+        paddingTop: 25,
         flex: 1,
+        alignItems: 'center'
     },
     inputs: {
         height: 100,
         width: '100%',
-        flex: 1,
         flexDirection: 'column',
         alignItems: 'center', 
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
+    },
+    input: {
+        fontFamily: 'roboto-regular',
+        width: '100%',
+        backgroundColor: '#F2F2F2',
+        borderRadius: 8,
+        height: 40,
+        paddingHorizontal: 25,
+        fontSize: 14
     },
     button: {
-        marginTop: 30,
+        marginBottom: 20,
         width: '90%',
-        height: 40,
+        height: 45,
         backgroundColor: '#63169E',
         borderRadius: 30
     },
@@ -28,5 +37,19 @@ export default StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         color: '#C4C4C4'
+    },
+    label: {
+        flex: 1,
+        marginTop: 25 ,
+        flexDirection: 'row',
+    },
+    text: {
+        fontFamily: 'roboto-medium',
+        color: '#7A7A7A',
+    },
+    switcher: {
+        color: '#30a8a1',
+        fontFamily: 'roboto-light',
+        marginLeft: 5
     }
 });

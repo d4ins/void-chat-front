@@ -5,7 +5,7 @@ const initialState = [];
 const contacts = (state = initialState, {type, payload}) => {
     switch(type) {
         case CONTACTS_INIT: {
-            return payload.contacts;
+            return [...payload.contacts];
         }
 
         default: {

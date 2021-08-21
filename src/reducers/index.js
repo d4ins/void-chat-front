@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import contacts from './contacts';
-import setting from './setting';
+import settings from './settings';
 import chats from './chats';
 
 const rootReducer = combineReducers({
-    contacts, setting, chats
+    contacts, settings, chats
 });
+
+export default rootReducer;

@@ -1,10 +1,3 @@
-import React from 'react';
-import { TextInput } from 'react-native';
+import ExtendInput from './ExtendInput';
 
-const ExtendInput = () => {
-    return (
-        <TextInput />
-    );
-};
-
-export default ExtendInput
+export default ExtendInput;

@@ -1,19 +1,20 @@
 import React from 'react';
-import { TextInput, StyleSheet } from 'react-native';
-import { Controller, Control, ControllerRenderProps } from 'react-hook-form';
+import { TextInput, } from 'react-native';
+import { Controller } from 'react-hook-form';
 
-const ExtendInput = ({control, name, rules, placeholder, isPassword, capitalize, keyboardType}) => {
+const ExtendInput = ({control, name, rules, placeholder, isPassword, capitalize, keyboardType, style}) => {
+
     const renderField = ({field: { onChange, onBlur, value }}) => (
         <TextInput
             keyboardType={keyboardType}
-            style={styles.input}
+            style={style}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
             value={value}
             placeholder={placeholder}
             secureTextEntry={isPassword}
             autoCapitalize={capitalize}/>
-    )
+    );
 
     return (
         <Controller

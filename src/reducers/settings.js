@@ -12,7 +12,7 @@ const initialState = {
     loading: false
 };
 
-const chats = (state = initialState, {type, payload}) => {
+const settings = (state = initialState, {type, payload}) => {
     switch(type) {
         case USER_INIT: {
             return {
@@ -41,4 +41,4 @@ const chats = (state = initialState, {type, payload}) => {
     }
 };
 
-export default chats;
+export default settings;
