@@ -3,7 +3,7 @@ import ExtendInput from '../ExtendInput';
 import { View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {useForm} from 'react-hook-form';
-import {_apiBase} from '../../constants';
+import {post} from '../../service/RequestController';
 import style from './style';
 
 
@@ -15,23 +15,9 @@ const SendBlock = ({messageLength, userId, chatId, add, updateId}) => {
         }
     });
 
-    const sendToServer = async (data) => {
-        const res = await fetch(`${_apiBase}/message/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!res.ok) {
-            throw console.log(new Error(`Something goes wrong, error status: ${res.status}`));
-        }
-
-        return res.json();
-    };
-
     const send = ({text}) => {
+        reset();
+
         const message = {
             text,
             userId,
@@ -44,19 +30,20 @@ const SendBlock = ({messageLength, userId, chatId, add, updateId}) => {
             error: false
         };
 
-        add(chatId, message);
-
-        sendToServer(message)
+        post(JSON.stringify(message), '/message/add')
             .then(({sended, id}) => {
                 if (sended) {
-                    updateId(chatId, message.id, id);
+                    message.id = id;
+                    add(chatId, message);
+                    //TODO: Поміняти логіку роботи шоб повідомлення сразу пушилось
+                    
+                    //updateId(chatId, message.id, id);
                 }
+
+                console.log(id);
             })
             .catch(() => {
                 //TODO: Доробити свап ерора
-            })
-            .finally(() => {
-                reset();
             });
 
     };

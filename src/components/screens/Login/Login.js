@@ -9,8 +9,7 @@ import {contactsInit} from '../../../actions/contacts';
 import {userInit, accessToggle, loadingToggle} from '../../../actions/settings';
 import { connect } from 'react-redux';
 import WithController from '../../../context';
-import {_apiBase} from '../../../constants';
-import { CommonActions } from '@react-navigation/native';
+import {post} from '../../../service/RequestController';
 
 
 const Login = ({navigation, controller, userInit, contactsInit, chatsInit, loading, accessToggle, loadingToggle}) => {
@@ -22,31 +21,12 @@ const Login = ({navigation, controller, userInit, contactsInit, chatsInit, loadi
         }
     });
 
-    const sendRes = async (data, url) => {
-        const res = await fetch(`${_apiBase}${url}`, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(data)
-        });
-
-        if (!res.ok) {
-            throw console.log(new Error(`Something goes wrong, error status: ${res.status}`));
-        }
-
-        return res.json();
-    };
-
     const onSubmit = (data) => {
         loadingToggle();
 
-        sendRes(data, '/login')
+        post(JSON.stringify(data), '/login')
             .then(({accessed, user, contacts, chats}) => {
                 if (accessed) {
-                    
-                    controller.connect();
-                    controller.emit('onlineAdd', {id: user.id});
 
                     userInit(user); 
                     contactsInit(contacts);

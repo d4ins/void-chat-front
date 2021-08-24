@@ -22,6 +22,11 @@ const style = StyleSheet.create({
     },
     subInfo: {
 
+    },
+    menuItem: {
+        marginTop: 5,
+        borderColor: 'black',
+        borderWidth: 1
     }
 });
 

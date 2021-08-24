@@ -29,6 +29,12 @@ const style = StyleSheet.create({
         borderTopRightRadius: 15,
         borderBottomRightRadius: 15
 
+    },
+    container: {
+        
+    },
+    menuItem: {
+
     }
 });
 

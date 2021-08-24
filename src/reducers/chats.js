@@ -1,4 +1,4 @@
-import {CHATS_INIT, CHATS_ADD_INFO, MESSAGE_ADD, MESSAGE_UPDATE_ID} from '../constants';
+import {CHATS_INIT, CHATS_ADD_INFO, MESSAGE_ADD, MESSAGE_UPDATE_ID, MESSAGE_REMOVE} from '../constants';
 
 const initialState = [];
 
@@ -50,11 +50,23 @@ const chats = (state = initialState, {type, payload}) => {
 
             const newChat = {
                 ...state[chatIndex],
-                messages: [...state[index].messages.slice(0, messageIndex), newMessage, ...state[index].messages.slice(messageIndex+1)]
+                messages: [...state[index].messages.slice(0, messageIndex), newMessage, ...state[index].messages.slice(messageIndex + 1)]
             };
 
             return [...state.slice(0, index), newChat, ...state.slice(index+1)];
-        }  
+        } 
+        
+        case MESSAGE_REMOVE: {
+            const {chatId, messageId} = payload;
+            const chatIndex = state.findIndex(({id}) => id === chatId);
+            const messageIndex = state[chatIndex].messages.findIndex(({id}) => id === messageId);
+            const newChat = {
+                ...state[chatIndex],
+                messages: [...state[chatIndex].messages.slice(0, messageIndex), ...state[chatIndex].messages.slice(messageIndex + 1)]
+            };
+
+            return [...state.slice(0, chatIndex), newChat, ...state.slice(chatIndex + 1)];
+        }
 
         default: {
             return state;

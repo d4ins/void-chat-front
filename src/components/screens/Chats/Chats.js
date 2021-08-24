@@ -1,33 +1,35 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { Pressable, FlatList } from 'react-native';
 import style from './style';
 import gStyle from '../../../style';
 import Chat from '../../Chat/Chat';
 import {connect} from 'react-redux';
 import {loadingToggle} from '../../../actions/settings';
 import {chatAddInfo} from '../../../actions/chats';
+import { withMenuContext } from 'react-native-popup-menu';
 
 
-const Chats = ({navigation ,chats, loadingToggle, chatAddInfo}) => {
+const Chats = ({navigation ,chats, loadingToggle, chatAddInfo, ctx: {menuActions: {openMenu}}}) => {
+
+
     return (
-        <View style={[gStyle.screen, style.screen]}>
+        <Pressable 
+            style={[gStyle.screen, style.screen]}>
             <FlatList 
                 data={chats}
-                renderItem={({item}) => {
-                    //console.log(item);
-                    return (
+                renderItem={({item}) => (
                         <Chat 
                             loadingToggle={loadingToggle}
                             chatAddInfo={chatAddInfo}
                             navigation={navigation}
                             id={item.id}
+                            open={openMenu}
                             avatar={item.avatar}
                             chatName={item.chatName}
                             users={item.users}
                             key={item.id}/>
-                    );
-                }}/>
-        </View>
+                )}/>
+        </Pressable>
     );
 };
 
@@ -40,4 +42,4 @@ const mapDispatchToProps = {
     chatAddInfo
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chats);
+export default withMenuContext(connect(mapStateToProps, mapDispatchToProps)(Chats));

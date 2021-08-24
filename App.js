@@ -7,6 +7,7 @@ import {Context} from './src/context';
 import {MenuProvider} from 'react-native-popup-menu';
 import SocketController from './src/service/SocketController';
 import store from './src/store';
+import Socket from './src/components/Socket';
 
 const controller = new SocketController();
 
@@ -21,15 +22,17 @@ const fonts = () => loadAsync({
 
  const App = () => {
 	const [font, setFont] = useState(false);
-						//<MenuProvider>
 
-						//</MenuProvider>
 
 	if(font) {
 		return (
 			<Provider store={store}>
 				<Context.Provider value={controller}>
-						<AppNavigation/>
+					<Socket>
+						<MenuProvider>
+							<AppNavigation/>
+						</MenuProvider>	
+					</Socket>
 				</Context.Provider>
 			</Provider>
 		);

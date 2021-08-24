@@ -2,20 +2,21 @@ import React from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import Avatar from '../Avatar';
 import style from './style';
-import {_apiBase} from '../../constants';
+import {get} from '../../service/RequestController';
+import {Menu, MenuTrigger, MenuOption, MenuOptions} from 'react-native-popup-menu';
 
-const Chat = ({navigation, id, chatName, avatar, loadingToggle, chatAddInfo, users}) => {
-    const getChat = async () => {
-        const res = await fetch(`${_apiBase}/chat/${id}`);
 
-        return res.json();
-    }; 
+const Chat = ({navigation, id, chatName, avatar, loadingToggle, chatAddInfo, users, open}) => {
+
+    const openMenu = () => {
+        open(id);
+    };
 
     const openChat = () => {
    
         if(!users) {
             loadingToggle();
-            getChat()
+            get(`/chat/${id}`)
                 .then(({users, messages}) => {
     
                     chatAddInfo(users, messages, id);
@@ -33,8 +34,10 @@ const Chat = ({navigation, id, chatName, avatar, loadingToggle, chatAddInfo, use
         }
 
     };
+
     return (
         <TouchableOpacity
+            onLongPress={openMenu}
             onPress={openChat}
             activeOpacity={0.8}
             style={style.wrapper}>
@@ -46,6 +49,24 @@ const Chat = ({navigation, id, chatName, avatar, loadingToggle, chatAddInfo, use
             <View style={style.subInfo}>
 
             </View>
+
+            <Menu
+                name={id}>
+                <MenuTrigger/>
+                <MenuOptions>
+                    <MenuOption>
+                        <Text style={style.menuItem}>Delete chat</Text>
+                    </MenuOption>
+
+                    <MenuOption>
+                        <Text style={style.menuItem}>Fix chat</Text>
+                    </MenuOption>
+
+                    <MenuOption>
+                        <Text style={style.menuItem}>Sound Off</Text>
+                    </MenuOption>                        
+                </MenuOptions>
+            </Menu>
         </TouchableOpacity>
     );
 };

@@ -23,4 +23,6 @@ export default class SocketController {
     emit = (header, data) => {
         this.socket.emit(header, data);
     }
+
+    
 }

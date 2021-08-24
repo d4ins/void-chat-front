@@ -1,4 +1,4 @@
-import {USER_INIT, LOADING_TOGGLE, ACCESS_TOGGLE} from '../constants';
+import {USER_INIT, LOADING_TOGGLE, ACCESS_TOGGLE, USER_UPDATE_ONLINE} from '../constants';
 
 const initialState = {
     user: {
@@ -20,7 +20,7 @@ const settings = (state = initialState, {type, payload}) => {
                 user: payload.user
             };
         }
-        
+
         case LOADING_TOGGLE: {
             return {
                 ...state,

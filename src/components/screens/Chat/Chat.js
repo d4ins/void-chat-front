@@ -5,10 +5,11 @@ import {connect} from 'react-redux';
 import WithController from '../../../context/';
 import style from './style';
 import SendBlock from '../../SendBlock';
-import {messageAdd, messageUpdateId} from '../../../actions/chats';
+import {messageAdd, messageUpdateId, messageRemove} from '../../../actions/chats';
+import { withMenuContext } from 'react-native-popup-menu';
 
 
-const Chat = ({route: {params: {id}}, chats, userId, messageAdd, messageUpdateId}) => {
+const Chat = ({route: {params: {id}}, chats, userId, messageAdd, messageUpdateId, ctx: {menuActions: {openMenu}}, messageRemove}) => {
     const chat = chats[chats.findIndex((chat) => id === chat.id)];
 
     const {users, messages, chatName, admin, avatar} = chat;
@@ -20,6 +21,8 @@ const Chat = ({route: {params: {id}}, chats, userId, messageAdd, messageUpdateId
                 data={messages}
                 renderItem={({item}) => (
                     <Message 
+                        messageRemove={messageRemove}
+                        open={openMenu}
                         key={item.id}
                         text={item.text} 
                         created={item.created}
@@ -48,6 +51,7 @@ const mapStateToProps = ({chats, settings: {user: {id}}}) => ({
 
 const mapDispatchToProps = {
     messageAdd, 
-    messageUpdateId
+    messageUpdateId,
+    messageRemove
 };
-export default WithController()(connect(mapStateToProps, mapDispatchToProps)(Chat));
+export default withMenuContext(WithController()(connect(mapStateToProps, mapDispatchToProps)(Chat)));
