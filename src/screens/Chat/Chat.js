@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, FlatList } from 'react-native';
-import Message from '../../Message';
+import Message from '../../components/Message';
 import {connect} from 'react-redux';
-import WithController from '../../../context/';
+import WithController from '../../context';
 import style from './style';
-import SendBlock from '../../SendBlock';
-import {messageAdd, messageUpdateId, messageRemove} from '../../../actions/chats';
+import SendBlock from '../../components/SendBlock';
+import {messageAdd, messageUpdateId, messageRemove} from '../../actions/chats';
 import { withMenuContext } from 'react-native-popup-menu';
 
 

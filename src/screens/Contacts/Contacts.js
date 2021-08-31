@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
 import style from './style';
-import gStyle from '../../../style';
-import Contact from '../../Contact';
+import gStyle from '../../style';
+import Contact from '../../components/Contact';
 import {connect} from 'react-redux';
 
 

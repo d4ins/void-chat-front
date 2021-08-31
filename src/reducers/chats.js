@@ -1,4 +1,4 @@
-import {CHATS_INIT, CHATS_ADD_INFO, MESSAGE_ADD, MESSAGE_UPDATE_ID, MESSAGE_REMOVE} from '../constants';
+import {CHATS_INIT, MESSAGE_ADD, MESSAGE_UPDATE_ID, MESSAGE_REMOVE} from '../constants';
 
 const initialState = [];
 
@@ -6,22 +6,6 @@ const chats = (state = initialState, {type, payload}) => {
     switch(type) {
         case CHATS_INIT: {
             return [...payload.chats];
-        }
-
-        case CHATS_ADD_INFO: {
-            const {id, users, messages} = payload;
-            const index = state.findIndex((chat) => chat.id === id);
-
-            const newMessages = state[index].messages ? [...state[index].messages, ...messages]: [...messages];
-            const newUsers = state[index].users ? [...state[index].users, ...users]: [...users];
-
-            const newChat = {
-                ...state[index],
-                messages: newMessages,
-                users: newUsers
-            };
-            
-            return [...state.slice(0, index), newChat, ...state.slice(index+1)];
         }
 
         case MESSAGE_ADD: {

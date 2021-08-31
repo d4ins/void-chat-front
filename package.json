@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo/vector-icons": "^12.0.5",
     "@react-navigation/drawer": "^6.1.4",
+    "@react-navigation/material-bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/stack": "^6.0.4",
     "@types/react-native": "^0.64.13",
@@ -23,8 +24,10 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-emoji-selector": "^0.2.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-paper": "^4.9.2",
     "react-native-popup-menu": "^0.15.11",
     "react-native-reanimated": "^2.2.0",
+    "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
     "react-navigation-header-buttons": "^7.0.2",
     "react-redux": "^7.2.4",

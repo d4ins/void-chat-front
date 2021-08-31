@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {useForm} from 'react-hook-form';
-import ExtendInput from '../../ExtendInput';
+import ExtendInput from '../../components/ExtendInput';
 import style from './style';
-import gStyle from '../../../style';
-import {chatsInit} from '../../../actions/chats';
-import {contactsInit} from '../../../actions/contacts';
-import {userInit, accessToggle, loadingToggle} from '../../../actions/settings';
+import gStyle from '../../style';
+import {chatsInit} from '../../actions/chats';
+import {contactsInit} from '../../actions/contacts';
+import {userInit, accessToggle, loadingToggle} from '../../actions/settings';
 import { connect } from 'react-redux';
-import WithController from '../../../context';
-import {post} from '../../../service/RequestController';
+import WithController from '../../context';
+import {post} from '../../service/RequestController';
 
 
 const Login = ({navigation, controller, userInit, contactsInit, chatsInit, loading, accessToggle, loadingToggle}) => {
@@ -37,7 +37,7 @@ const Login = ({navigation, controller, userInit, contactsInit, chatsInit, loadi
                     navigation.reset({
                         index: 0,
                         routes: [
-                            { name: 'Main' },
+                            { name: 'MainStack' },
                         ],
                     });
                 }
